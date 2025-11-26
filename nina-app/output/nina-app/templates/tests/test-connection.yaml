@@ -1,0 +1,21 @@
+---
+# Source: nina-app/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "release-name-nina-app-test-connection"
+  labels:
+    helm.sh/chart: nina-app-1.0.0
+    app.kubernetes.io/name: nina-app
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['release-name-nina-app:80']
+  restartPolicy: Never
